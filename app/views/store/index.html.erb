@@ -1,0 +1,28 @@
+<h1>The Pragmatic Store</h1>
+<!--<p>Find me in app/views/store/index.html.erb</p> -->
+
+
+<%if notice %>
+<p id="notice"><%= notice %></p>
+<% end %>
+
+<h2><%= t('.title_html') %></h2>
+
+<%= @products.each do |product| %>
+	<div class="entry">
+	<%= image_tag(product.image_url) %>
+	<h3><%= product.title %></h3>
+	<%= sanitize(product.description) %>
+	<div class="price_line">
+	<span class="price"><%= number_to_currency(product.price) %></span>	
+	<%= button_to t('.add_html'), line_items_path(:product_id => product.id),:remote => true %>
+	<!-- product is used a the place holder throughout the iteration, very important -->
+	</div>
+
+</div>
+<div>
+<%= link_to 'Cart', carts_path %>	
+</div>
+
+<% end %>
+
